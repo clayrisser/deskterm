@@ -3,5 +3,6 @@ Turn your desktop into a terminal
 
 ## Install
 ```
-sudo bash install.sh
+git clone https://github.com/jamrizzi/deskterm.git
+sudo bash deskterm/install.sh
 ```
