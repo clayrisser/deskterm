@@ -1,5 +1,3 @@
-debug_print(get_screen_geometry());
-
 if (get_application_name()=="Terminal") then
 	if (get_window_role()=="Deskterm") then
 		set_window_position2(0, 0);
