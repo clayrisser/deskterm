@@ -1,5 +1,5 @@
 # deskterm
-Turn your desktop into a terminal
+Turn your desktop into a terminal.
 
 ## Install
 1. Create a terminal profile named Deskterm
@@ -12,3 +12,6 @@ Turn your desktop into a terminal
   ```
 
 3. Restart your computer
+
+## Notes
+This has only been teseted on the Gnome3 shell.
