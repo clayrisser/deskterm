@@ -1,11 +1,13 @@
 apt-get install -y devilspie2
 
-tee -a /etc/skel/.profile<<EOF
+tee -a ~/.profile<<EOF
 devilspie2
 sleep 4s
 gnome-terminal --window-with-profile=Deskterm --role=Deskterm --hide-menubar
 EOF
 
-mkdir /etc/skel/.config/
-mkdir /etc/skel/.config/devilspie2/
-mv deskterm.lua /etc/skel/.config/devilspie2/
+mkdir ~/.config/
+mkdir ~/.config/devilspie2/
+mv deskterm.lua ~/.config/devilspie2/
+
+cd ../ && rm -rf ./deskterm/
