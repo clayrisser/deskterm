@@ -1,5 +1,5 @@
 # deskterm
-Turn your desktop into a terminal.
+Turn your linux desktop into a terminal.
 
 ## Install
 1. Create a terminal profile named Deskterm
