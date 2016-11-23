@@ -13,5 +13,11 @@ Turn your linux desktop into a terminal.
 
 3. Restart your computer
 
+## Hotkey
+You can switch between your desktop and applications using the following hotkey combination.
+```
+Ctrl + Alt + d
+```
+
 ## Notes
 This has only been teseted on the Gnome3 shell.
