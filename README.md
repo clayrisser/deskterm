@@ -1,6 +1,9 @@
 # deskterm
 Turn your linux desktop into a terminal.
 
+## Screenshots
+
+
 ## Install
 1. Create a terminal profile named Deskterm
 
@@ -19,5 +22,6 @@ You can switch between your desktop and applications using the following hotkey 
 Ctrl + Alt + d
 ```
 
-## Notes
-This has only been teseted on the Gnome3 shell.
+## Support
+This has only been teseted on Ubuntu with the Gnome3 shell.
+Please submit an [issue](https://github.com/jamrizzi/deskterm/issues/new) request if you want me to support your system.
