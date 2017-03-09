@@ -2,7 +2,7 @@
 Turn your linux desktop into a terminal.
 
 ## Screenshots
-![Screenshot 1](https://drive.google.com/uc?export=view&id=AF1QipNHxGuuKHHa3Nu2QXm35LgqOhBBplgkYHQGjJdS)
+![Screenshot 1](https://drive.google.com/uc?export=view&id=1RNWjnB_sC1pwgYXQEishK8sFV9s8TzDT1A)
 ![Screenshot 2](https://drive.google.com/uc?export=view&id=1WVasIBgsG7yq629tNUqc0bo0_s0H5wlyoA)
 
 ## Install
