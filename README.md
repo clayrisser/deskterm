@@ -2,7 +2,8 @@
 Turn your linux desktop into a terminal.
 
 ## Screenshots
-![Screenshot 1](https://drive.google.com/uc?export=view&id=1WVasIBgsG7yq629tNUqc0bo0_s0H5wlyoA)
+![Screenshot 1](https://drive.google.com/uc?export=view&id=AF1QipNHxGuuKHHa3Nu2QXm35LgqOhBBplgkYHQGjJdS)
+![Screenshot 2](https://drive.google.com/uc?export=view&id=1WVasIBgsG7yq629tNUqc0bo0_s0H5wlyoA)
 
 ## Install
 1. Create a terminal profile named Deskterm
