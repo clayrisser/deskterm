@@ -1,0 +1,85 @@
+#!/bin/sh
+# deskterm - turn your Linux desktop into a terminal.
+#
+# Starts devilspie2 (an X11 window-matching daemon) with the bundled rule,
+# then opens a gnome-terminal window with the X window role "Deskterm". The
+# rule catches that window and re-types it as the desktop background.
+
+set -eu
+
+usage() {
+	cat <<EOF
+Usage: deskterm [-h|--help]
+
+Turn your Linux desktop into a terminal. Requires an X11 session,
+devilspie2, and gnome-terminal with a profile named "Deskterm".
+
+Environment:
+  DESKTERM_PROFILE  gnome-terminal profile to use (default: Deskterm)
+  DESKTERM_RULE     path to the devilspie2 rule file (default: auto-detected)
+EOF
+}
+
+case "${1:-}" in
+-h | --help)
+	usage
+	exit 0
+	;;
+"") ;;
+*)
+	usage >&2
+	exit 2
+	;;
+esac
+
+# devilspie2 matches and re-types X windows via libwnck/EWMH, which is
+# impossible under Wayland, so fail fast instead of half-working.
+if [ "${XDG_SESSION_TYPE:-}" = "wayland" ]; then
+	echo "deskterm: an X11 session is required (devilspie2 cannot manage Wayland windows)" >&2
+	exit 1
+fi
+if [ -z "${DISPLAY:-}" ]; then
+	echo "deskterm: DISPLAY is not set (an X11 session is required)" >&2
+	exit 1
+fi
+for cmd in devilspie2 gnome-terminal; do
+	command -v "$cmd" >/dev/null 2>&1 || {
+		echo "deskterm: $cmd is missing (install it with your package manager)" >&2
+		exit 1
+	}
+done
+
+# Locate the devilspie2 rule: env override, installed copy, repo checkout.
+script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+rule=${DESKTERM_RULE:-}
+if [ -z "$rule" ]; then
+	for candidate in \
+		"$script_dir/../share/deskterm/deskterm.lua" \
+		"$script_dir/../share/deskterm.lua"; do
+		if [ -f "$candidate" ]; then
+			rule=$candidate
+			break
+		fi
+	done
+fi
+if [ -z "$rule" ] || [ ! -f "$rule" ]; then
+	echo "deskterm: devilspie2 rule file not found (set DESKTERM_RULE)" >&2
+	exit 1
+fi
+
+# devilspie2 loads every .lua file in its per-user config dir, so drop the
+# rule there (only when missing or outdated) instead of touching ~/.profile.
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/devilspie2"
+mkdir -p "$config_dir"
+if ! cmp -s "$rule" "$config_dir/deskterm.lua" 2>/dev/null; then
+	cp "$rule" "$config_dir/deskterm.lua"
+fi
+
+if ! pgrep -x devilspie2 >/dev/null 2>&1; then
+	devilspie2 >/dev/null 2>&1 &
+	# Give devilspie2 a moment to connect to the X server before the
+	# terminal window it must catch is mapped.
+	sleep 2
+fi
+
+exec gnome-terminal --window --profile="${DESKTERM_PROFILE:-Deskterm}" --role=Deskterm --hide-menubar
