@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Deskterm
+Comment=Turn your Linux desktop into a terminal
+Exec=deskterm
